@@ -4,7 +4,7 @@ services:
   db:
    image: mariadb:10
    volumes:
-    - redminevolume: /var/lib/mysql
+    - redminevolume:/var/lib/mysql
    environment:
        MYSQL_ROOT_PASSWORD: Tip8Ce3Sic4
        MYSQL_DATABASE: redmine
@@ -17,7 +17,7 @@ services:
     - "80:80"
 
   redmine:
-   image: ruby:alpine
+   build: .
    ports:
     - "3000:3000"
    environment:
