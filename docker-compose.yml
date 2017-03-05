@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  db:
+   image: mariadb:10
+   volumes:
+    - redminevolume: /var/lib/mysql
+   environment:
+       MYSQL_ROOT_PASSWORD: Tip8Ce3Sic4
+       MYSQL_DATABASE: redmine
+       MYSQL_USER: redmine
+       MYSQL_PASSWORD: Do2Gy6Re8
+
+  nginx:
+   image: nginx:stable-alpine
+   ports:
+    - "80:80"
+
+  redmine:
+   image: ruby:alpine
+   ports:
+    - "3000:3000"
+   environment:
+       REDMINE_DB_MYSQL: db
+       REDMINE_DB_DATABASE: redmine
+       REDMINE_DB_USERNAME: redmine
+       REDMINE_DB_PASSWORD: Do2Gy6Re8
+   depends_on:
+    - db
+
+volumes:
+ redminevolume:
