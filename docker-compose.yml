@@ -13,7 +13,7 @@ services:
    restart: always
 
   nginx:
-   build: .
+   build: nginx
    ports:
     - "80:80"
    depends_on:
@@ -22,7 +22,7 @@ services:
    restart: always
 
   redmine:
-   image: redmine:3.3-passenger
+   image: redmine:3.3
    environment:
        REDMINE_DB_MYSQL: db
        REDMINE_DB_DATABASE: redmine
