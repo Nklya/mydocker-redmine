@@ -119,15 +119,12 @@ case "$1" in
 		elif [ "$1" = 'puma' ]; then
 			PUMA_BIND_URI=${PUMA_BIND_URI:-tcp://0.0.0.0:3000}
 			PUMA_THREADS=${PUMA_THREADS:-0:2}
-			set -- tini "rails server -b 0.0.0.0"
-			# set "puma -e $RAILS_ENV -b "$PUMA_BIND_URI" -t $PUMA_THREADS --prune-bundler"
-
+			set -- tini -- "puma" "-e" "$RAILS_ENV" "-b" "$PUMA_BIND_URI" "-t" "$PUMA_THREADS" "--prune-bundler"
 		fi
 
 		set -- gosu redmine "$@"
 		;;
 esac
 
-#cat config/database.yml
 echo "$@"
 exec "$@"

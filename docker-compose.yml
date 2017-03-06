@@ -31,7 +31,7 @@ services:
        REDMINE_DB_PASSWORD: Do2Gy6Re8
    depends_on:
     - db
-#    restart: always
+   restart: always
 
 volumes:
  redminevolume:
