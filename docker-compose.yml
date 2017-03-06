@@ -13,7 +13,7 @@ services:
    restart: always
 
   nginx:
-   build: nginx
+   build: nginx-proxy
    ports:
     - "80:80"
    depends_on:
@@ -22,15 +22,16 @@ services:
    restart: always
 
   redmine:
-   image: redmine:3.3
+   build: redmine-puma
    environment:
+       TZ: Europe/Moscow
        REDMINE_DB_MYSQL: db
        REDMINE_DB_DATABASE: redmine
        REDMINE_DB_USERNAME: redmine
        REDMINE_DB_PASSWORD: Do2Gy6Re8
    depends_on:
     - db
-   restart: always
+#    restart: always
 
 volumes:
  redminevolume:
