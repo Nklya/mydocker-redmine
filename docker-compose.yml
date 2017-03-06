@@ -10,16 +10,19 @@ services:
        MYSQL_DATABASE: redmine
        MYSQL_USER: redmine
        MYSQL_PASSWORD: Do2Gy6Re8
+   restart: always
 
   nginx:
-   image: nginx:stable-alpine
-   ports:
-    - "80:80"
-
-  redmine:
    build: .
    ports:
-    - "3000:3000"
+    - "80:80"
+   depends_on:
+    - db
+    - redmine
+   restart: always
+
+  redmine:
+   image: redmine:3.3-passenger
    environment:
        REDMINE_DB_MYSQL: db
        REDMINE_DB_DATABASE: redmine
@@ -27,6 +30,7 @@ services:
        REDMINE_DB_PASSWORD: Do2Gy6Re8
    depends_on:
     - db
+   restart: always
 
 volumes:
  redminevolume:
